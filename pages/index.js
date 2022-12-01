@@ -10,12 +10,16 @@ export default function HomePage() {
     setEntries([{ ...newEntry }, ...entries]);
   };
 
+  const handleDelete = (id) => {
+    setEntries(entries.filter((entry) => entry.id !== id));
+  };
+
   console.log(entries);
 
   return (
     <>
       <Header />
-      <Card entries={entries} />
+      <Card entries={entries} onDelete={handleDelete} />
       <Form onNewEntry={handleNewEntry} />
     </>
   );

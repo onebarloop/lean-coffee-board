@@ -1,3 +1,4 @@
+import { nanoid } from "nanoid";
 import styled from "styled-components";
 
 export default function Form({ onNewEntry }) {
@@ -6,6 +7,7 @@ export default function Form({ onNewEntry }) {
     onNewEntry({
       name: event.target.elements.name.value,
       thoughts: event.target.elements.thoughts.value,
+      id: nanoid(),
     });
     event.target.reset();
   };
