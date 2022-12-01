@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { FaTrashAlt } from "react-icons/Fa";
+import { FaTrashAlt } from "react-icons/fa";
 
 export default function Card({ entries, onDelete }) {
   return (

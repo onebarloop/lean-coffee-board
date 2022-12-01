@@ -14,14 +14,16 @@ export default function Form({ onNewEntry }) {
 
   return (
     <StyledFieldset>
-      <legend>Submit your thoughts</legend>
+      <legend>
+        <b>Submit your ideas</b>
+      </legend>
       <StyledForm onSubmit={submit}>
         <label htmlFor="thoughts">Your Thoughts</label>
         <textarea id="thoughts" name="thoughts" required></textarea>
         <label htmlFor="name" name="name">
           Your Name
         </label>
-        <input id="name" name="name" required></input>
+        <input id="name" name="name" required maxLength={15}></input>
         <StyledSubmitBtn>Submit</StyledSubmitBtn>
       </StyledForm>
     </StyledFieldset>
@@ -30,7 +32,7 @@ export default function Form({ onNewEntry }) {
 
 const StyledFieldset = styled.fieldset`
   padding: 2rem;
-  width: 70%;
+  width: 40%;
   margin: auto;
 `;
 
