@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export default function Edit({ thoughts, id, edit, onChange, onEdit }) {
+export default function Edit({ thoughts, id, onChange, onEdit }) {
   const handleEdit = (event) => {
     event.preventDefault();
     onChange(id, event.target.value);
@@ -8,7 +8,7 @@ export default function Edit({ thoughts, id, edit, onChange, onEdit }) {
 
   const save = (event) => {
     event.preventDefault();
-    onEdit(id, edit);
+    onEdit(id);
   };
 
   return (
@@ -33,6 +33,7 @@ const StyledEdit = styled.form`
   color: var(--yellow);
   padding: 0.5rem;
   border-radius: 0.6em;
+  width: 90%;
 
   button {
     align-self: flex-end;

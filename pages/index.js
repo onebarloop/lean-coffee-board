@@ -24,10 +24,10 @@ export default function HomePage() {
     );
   };
 
-  const handleEdit = (id, edit) => {
+  const handleEdit = (id) => {
     setEntries(
       entries.map((entry) => {
-        if (entry.id === id) return { ...entry, edit: !edit };
+        if (entry.id === id) return { ...entry, edit: !entry.edit };
         return entry;
       })
     );
