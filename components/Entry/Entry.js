@@ -38,9 +38,9 @@ export default function Entry({
 
         <p className="thoughts">{thoughts}</p>
       </StyledListItem>
-      {edit ? (
+      {edit && (
         <Edit thoughts={thoughts} id={id} onChange={onChange} onEdit={onEdit} />
-      ) : null}
+      )}
     </StyledCard>
   );
 }
