@@ -8,6 +8,7 @@ export default function Form({ onNewEntry }) {
       name: event.target.elements.name.value,
       thoughts: event.target.elements.thoughts.value,
       id: nanoid(),
+      edit: false,
     });
     event.target.reset();
   };
