@@ -1,23 +1,42 @@
 import styled from "styled-components";
 import { FaTrashAlt } from "react-icons/fa";
 
-export default function Card({ entries, onDelete }) {
+import Edit from "../Edit/Edit";
+
+export default function Card({ entries, onDelete, onChange, onEdit }) {
   return (
     <StyledList>
       {entries.map((entry) => (
-        <StyledListItem key={entry.id}>
-          <p>
-            by <b>{entry.name}</b>
-          </p>
-          <button onClick={() => onDelete(entry.id)}>
-            <FaTrashAlt />
-          </button>
-          <p className="thoughts">{entry.thoughts}</p>
-        </StyledListItem>
+        <StyledCard key={entry.id}>
+          <StyledListItem>
+            <p>
+              by <b>{entry.name}</b>
+            </p>
+            <button onClick={() => onDelete(entry.id)}>
+              <FaTrashAlt />
+            </button>
+            <button onClick={() => onEdit(entry.id, entry.edit)}>Edit</button>
+            <p className="thoughts">{entry.thoughts}</p>
+          </StyledListItem>
+          {entry.edit ? (
+            <Edit
+              thoughts={entry.thoughts}
+              id={entry.id}
+              onChange={onChange}
+              onEdit={onEdit}
+              edit={entry.edit}
+            />
+          ) : null}
+        </StyledCard>
       ))}
     </StyledList>
   );
 }
+
+const StyledCard = styled.div`
+  display: grid;
+  grid-template-columns: 1fr;
+`;
 
 const StyledList = styled.ul`
   display: grid;
@@ -27,19 +46,20 @@ const StyledList = styled.ul`
   list-style: none;
   padding: 5rem;
   margin: auto;
-  align-items: center;
+  align-items: start;
 `;
 
 const StyledListItem = styled.li`
   border: 3px solid black;
   padding: 1rem;
   display: grid;
-  grid-template-columns: 3fr 1fr;
+  gap: 0.5rem;
+  grid-template-columns: 3fr 1fr 1fr;
 
   .thoughts {
     margin-top: 2rem;
     grid-column-start: 1;
-    grid-column-end: 3;
+    grid-column-end: 4;
   }
 
   button {
