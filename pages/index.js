@@ -6,24 +6,39 @@ import Footer from "../components/Footer/Footer";
 
 export default function HomePage() {
   const [entries, setEntries] = useState([]);
-  console.log(entries);
 
   const handleNewEntry = (newEntry) => {
-    setEntries([{ ...newEntry }, ...entries]);
+    setEntries([...entries, { ...newEntry }]);
   };
 
-  const handleDelete = (id) => {
+  async function handleDelete(id) {
     setEntries(entries.filter((entry) => entry.id !== id));
-  };
+    await fetch(
+      "https://lean-coffee-board-api-nextjs.vercel.app/api/questions/" + id,
+      {
+        method: "DELETE",
+      }
+    );
+  }
 
-  const handleChange = (id, thoughts) => {
+  async function handleChange(id, thoughts) {
     setEntries(
       entries.map((entry) => {
         if (entry.id === id) return { ...entry, thoughts };
         return entry;
       })
     );
-  };
+    await fetch(
+      "https://lean-coffee-board-api-nextjs.vercel.app/api/questions/" + id,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ text: thoughts }),
+      }
+    );
+  }
 
   const handleEdit = (id) => {
     setEntries(
@@ -40,17 +55,22 @@ export default function HomePage() {
     );
     const data = await response.json();
 
-    data.map((entry) =>
-      handleNewEntry({
-        name: entry.name,
-        thoughts: entry.text,
-        id: entry.id,
-        edit: false,
-      })
-    );
+    const newContent = data.map((item) => ({
+      name: item.name,
+      thoughts: item.text,
+      id: item.id,
+      edit: false,
+    }));
+    console.log("GET");
+
+    setEntries(newContent);
   }
   useEffect(() => {
-    getQuestions();
+    const interval = setInterval(getQuestions, 10000);
+
+    return () => {
+      clearInterval(interval);
+    };
   }, []);
 
   return (

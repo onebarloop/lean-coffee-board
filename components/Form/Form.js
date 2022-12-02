@@ -2,7 +2,7 @@ import { nanoid } from "nanoid";
 import styled from "styled-components";
 
 export default function Form({ onNewEntry }) {
-  const handleSubmit = (event) => {
+  async function handleSubmit(event) {
     event.preventDefault();
     onNewEntry({
       name: event.target.elements.name.value,
@@ -10,8 +10,23 @@ export default function Form({ onNewEntry }) {
       id: nanoid(),
       edit: false,
     });
+    await fetch(
+      "https://lean-coffee-board-api-nextjs.vercel.app/api/questions",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: event.target.elements.name.value,
+          text: event.target.elements.thoughts.value,
+          id: nanoid(),
+        }),
+      }
+    );
+
     event.target.reset();
-  };
+  }
 
   return (
     <StyledFieldset>
