@@ -1,15 +1,17 @@
 import styled from "styled-components";
 
-export default function Header() {
+export default function Footer() {
   return (
-    <StyledHeader>
+    <StyledFooter>
       <h1>Lean Coffee Board</h1>
-    </StyledHeader>
+    </StyledFooter>
   );
 }
 
-const StyledHeader = styled.header`
+const StyledFooter = styled.footer`
   background-color: var(--blue);
   color: var(--yellow);
   padding: 2rem;
+  margin-top: 2rem;
+  text-align: end;
 `;

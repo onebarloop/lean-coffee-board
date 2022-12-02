@@ -2,7 +2,7 @@ import { nanoid } from "nanoid";
 import styled from "styled-components";
 
 export default function Form({ onNewEntry }) {
-  const submit = (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
     onNewEntry({
       name: event.target.elements.name.value,
@@ -18,7 +18,7 @@ export default function Form({ onNewEntry }) {
       <legend>
         <b>Submit your ideas</b>
       </legend>
-      <StyledForm onSubmit={submit}>
+      <StyledForm onSubmit={handleSubmit}>
         <label htmlFor="thoughts">Your Thoughts</label>
         <textarea id="thoughts" name="thoughts" required></textarea>
         <label htmlFor="name" name="name">
@@ -35,6 +35,8 @@ const StyledFieldset = styled.fieldset`
   padding: 2rem;
   width: 40%;
   margin: auto;
+  border: 2px dotted black;
+  position: static;
 `;
 
 const StyledForm = styled.form`

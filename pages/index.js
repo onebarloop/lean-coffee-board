@@ -1,7 +1,8 @@
 import Card from "../components/Card/Card";
 import Form from "../components/Form/Form";
 import Header from "../components/Header/Header";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import Footer from "../components/Footer/Footer";
 
 export default function HomePage() {
   const [entries, setEntries] = useState([]);
@@ -24,27 +25,47 @@ export default function HomePage() {
     );
   };
 
-  const handleEdit = (id, edit) => {
+  const handleEdit = (id) => {
     setEntries(
       entries.map((entry) => {
-        if (entry.id === id) return { ...entry, edit: !edit };
+        if (entry.id === id) return { ...entry, edit: !entry.edit };
         return entry;
       })
     );
   };
 
-  console.log(entries);
+  async function getQuestions() {
+    const response = await fetch(
+      "https://lean-coffee-board-api-nextjs.vercel.app/api/questions"
+    );
+    const data = await response.json();
+
+    data.map((entry) =>
+      handleNewEntry({
+        name: entry.name,
+        thoughts: entry.text,
+        id: entry.id,
+        edit: false,
+      })
+    );
+  }
+  useEffect(() => {
+    getQuestions();
+  }, []);
 
   return (
     <>
       <Header />
+
       <Card
         entries={entries}
         onDelete={handleDelete}
         onChange={handleChange}
         onEdit={handleEdit}
       />
+
       <Form onNewEntry={handleNewEntry} />
+      <Footer />
     </>
   );
 }
