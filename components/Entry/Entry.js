@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { FaTrashAlt } from "react-icons/fa";
+import { FaTrashAlt, FaEdit } from "react-icons/fa";
 import Edit from "../Edit/Edit";
 
 export default function Entry({
@@ -24,7 +24,9 @@ export default function Entry({
               <FaTrashAlt />
             </button>
 
-            <button disabled>Edit</button>
+            <button disabled>
+              <FaEdit />
+            </button>
           </>
         ) : (
           <>
@@ -32,7 +34,9 @@ export default function Entry({
               <FaTrashAlt />
             </button>
 
-            <button onClick={() => onEdit(id)}>Edit</button>
+            <button onClick={() => onEdit(id)}>
+              <FaEdit />
+            </button>
           </>
         )}
 

@@ -26,14 +26,14 @@ export default function Edit({ thoughts, id, onChange, onEdit }) {
 }
 
 const StyledEdit = styled.form`
-  display: flex;
-  gap: 1.5rem;
+  display: grid;
+  grid-template-columns: 25% 45% 25%;
+  justify-content: space-between;
   margin-top: 1rem;
   background-color: black;
   color: var(--yellow);
   padding: 0.5rem;
   border-radius: 0.6em;
-  width: 90%;
 
   button {
     align-self: flex-end;
