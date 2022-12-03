@@ -4,27 +4,16 @@ import styled from "styled-components";
 export default function Form({ onNewEntry }) {
   async function handleSubmit(event) {
     event.preventDefault();
-    onNewEntry({
-      name: event.target.elements.name.value,
-      thoughts: event.target.elements.thoughts.value,
-      id: nanoid(),
-      edit: false,
-    });
-    await fetch(
+    onNewEntry(
       "https://lean-coffee-board-api-nextjs.vercel.app/api/questions",
+      event,
       {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name: event.target.elements.name.value,
-          text: event.target.elements.thoughts.value,
-          id: nanoid(),
-        }),
+        name: event.target.elements.name.value,
+        thoughts: event.target.elements.thoughts.value,
+        id: nanoid(),
+        edit: false,
       }
     );
-
     event.target.reset();
   }
 
